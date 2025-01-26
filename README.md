@@ -1,6 +1,6 @@
 # bacteria
 
-## Project Description
+## Description
 
 This C/ASM project explores the principle of self-reproduction through the implementation of a quine, a program that produces a copy of its own source code as output.<br />
 It delves into the challenges associated with self-replicating code and serves as an excellent introduction to more complex topics, including malware development, providing insights into the mechanisms and implications of self-replicating programs.
@@ -41,14 +41,7 @@ in the ASM/C directory.<br /><br />
 
 This command will execute the test suite to verify that each generated program correctly replicates its source code, differing only in the index variable.
 
-### Usage
-
-Run the program:
-```bash
-./bacteria
-```
-
-### Screenshots
+## Screenshots
 
 1. **Before Execution**:
 <img src="screenshots/initial-state.png" />
