@@ -55,5 +55,5 @@ Run the program:
 No replication has occurred yet. Index is at 50.
 
 3. **After Execution**:
-<img src="screenshots/after-replication.png" width=300 />
+<img src="screenshots/after-replication.png" width=400 />
 This shows the replicated files created by the program.
