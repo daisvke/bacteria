@@ -1,6 +1,7 @@
 # Temp files
 .*.sw?
 tmp/
+bacteria_*
 
 # Prerequisites
 *.d
