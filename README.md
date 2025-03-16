@@ -21,6 +21,23 @@ When executed, the program performs the following actions:
 1. The program stops based on the file name: it executes only if the integer `X` is greater than or equal to 0.
 2. The integer, initially set to 50, is decremented with each execution, controlling how many iterations the program performs.
 
+## Settings (C Code)
+You can set your own values for the following variables by changing the assigned values directly on the source file:
+### File name
+```c
+#define FNAME "bacteria"
+```
+
+### Extension name
+```c
+#define EXT ".ext"
+```
+
+### Reproduction quantity
+```c
+int i = 50;
+```
+
 ## Usage
 ### Build and run
 
