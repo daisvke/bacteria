@@ -50,7 +50,7 @@ test: $(NAME)
 collection:
 	@if [ -z "$(ext)" ] || [ -z "$(i)" ] || [ "$(i)" -lt 1 ] ; then \
 		echo "Usage: make collection n=<QUANTITY> ext=<EXTENSIONS>\n"; \
-		echo "Argument 'n' must be superior to 1\n"; \
+		echo "Argument 'i' must be superior to 1\n"; \
 		exit 1; \
 	fi
 	@echo -n "$(INFO) Starting collection...\n\n"
