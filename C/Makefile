@@ -5,29 +5,39 @@
 # ▐▙▄▞▐▌ ▐▝▚▄▄▖ █ ▐▙▄▄▐▌ ▐▗▄█▄▐▌ ▐▌
                                  
 
-NAME		= bacteria
-CC			= clang
-CFLAGS		= -Wall -Wextra -Werror
+# ==========================
+# Build Configuration
+# ==========================
 
-SRC			= $(NAME).c
-TMP_DIR		= tmp
+NAME			= bacteria
+CC				= clang
+CFLAGS			= -Wall -Wextra -Werror
+
+SRC				= $(NAME).c
+TMP_DIR			= tmp
+
 
 # ==========================
 # ANSI Escape Codes
 # ==========================
 
 # ANSI escape codes for stylized output
-RESET 		= \033[0m
-GREEN		= \033[32m
-YELLOW		= \033[33m
-RED			= \033[31m
+RESET 			= \033[0m
+GREEN			= \033[32m
+YELLOW			= \033[33m
+RED				= \033[31m
 
 # Logs levels
-INFO 		= $(YELLOW)[INFO]$(RESET)
-ERROR		= $(RED)[ERROR]$(RESET)
-DONE		= $(GREEN)[DONE]$(RESET)
+INFO 			= $(YELLOW)[INFO]$(RESET)
+ERROR			= $(RED)[ERROR]$(RESET)
+DONE			= $(GREEN)[DONE]$(RESET)
 
-.PHONY: all test clean fclean re
+
+# ==========================
+# Building
+# ==========================
+
+.PHONY: all
 
 all: $(NAME)
 
@@ -35,35 +45,58 @@ $(NAME): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 	@echo -n "$(DONE) Compilation complete.\n"
 
+
+# ==========================
+# Testing
+# ==========================
+
+.PHONY: test
+
 test: $(NAME)
+	@echo "$(INFO) Starting tests...\n"
 	mkdir -p $(TMP_DIR)/
 	cp $(NAME) $(TMP_DIR)/$(NAME)
-	cd $(TMP_DIR) && ./$(NAME) \
-	&& echo "\n\033[31m========== Runnning 1st test ==========\033[0m" \
+	@cd $(TMP_DIR) && ./$(NAME) \
+	&& echo "\n$(RED)========== Runnning 1st test ==========$(RESET)" \
 	&& ls -al | grep $(NAME) | wc -l \
-	&& echo "\n\033[31m========== Runnning 2nd test ==========\033[0m" \
+	&& echo "\n$(RED)========== Runnning 2nd test ==========$(RESET)" \
 	&& diff ../$(SRC) $(NAME)_5.c ; \
 	diff ../$(SRC) $(NAME)_4.c ; \
 	diff $(NAME)_5.c $(NAME)_0.c || true
+	@echo "\n$(DONE) Tests complete."
+
+.PHONY: collection
+
+i	?= 5
+ext	?= txt vob pdf crt
 
 # Produce a given quantity of quines of different file extensions 
 collection:
-	@if [ -z "$(ext)" ] || [ -z "$(i)" ] || [ "$(i)" -lt 1 ] ; then \
-		echo "Usage: make collection n=<QUANTITY> ext=<EXTENSIONS>\n"; \
-		echo "Argument 'i' must be superior to 1\n"; \
+	@if [ "$(i)" -lt 0 ] ; then \
+		echo "Usage: make collection i=<QUANTITY> ext=<EXTENSIONS>\n"; \
+		echo "Argument 'i' must be superior to 0\n"; \
 		exit 1; \
 	fi
-	@echo -n "$(INFO) Starting collection...\n\n"
+	@echo "$(INFO) Starting collection...\n"
 	@for ext in $(ext); do \
-		make -s run_one_quine n=$(i) ext=$$ext; \
+		make -s run_one_quine i=$(i) ext=$$ext; \
 	done
-	@echo -n "\n$(DONE) Collection complete.\n"
+	@echo "\n$(DONE) Collection complete."
+
+.PHONY: run_one_quine
 
 run_one_quine:
-	@echo -n "$(INFO) Reproducing bacteria x$$(($(i) + 1)) with .$(ext) extension...\n"
+	@echo "$(INFO) Reproducing bacteria x$$(($(i) + 1)) with .$(ext) extension..."
 	@find -name "bacteria.c" -exec sed -i 's/i = [0-9]\+/i = $(i)/g; s/EXT ".*/EXT ".$(ext)"/g' {} \;
 	@make -s 
 	./$(NAME)
+
+
+# ==========================
+# Cleaning
+# ==========================
+
+.PHONY: clean fclean re
 
 clean:
 	rm -f $(NAME)_*
