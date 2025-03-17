@@ -41,15 +41,31 @@ int i = 50;
 ## Usage
 ### Build and run
 
-- Build the project using `make`:
-   ```bash
-   cd ASM/  # Or cd C/
-   make
-   ./bacteria
-   ```
+#### ASM
+```bash
+cd ASM/
+make
+./bacteria
+```
+
+#### C
+```bash
+cd C/
+make
+./bacteria
+
+# Produce a given quantity of quines of different file extensions 
+cd C/
+make collection i=<QUANTITY> ext=<EXTENSION,...>
+
+Example:
+make collection i=10 ext="txt pdf vob"
+```
+![Collection generation](screenshots/collection.png)
 
 ### Testing
 
+#### Quine verification
 To test if all generated files are quines (i.e., they produce the same code with only the variable value differing), run:
 ```bash
 make test
@@ -57,6 +73,12 @@ make test
 in the ASM/C directory.<br /><br />
 
 This command will execute the test suite to verify that each generated program correctly replicates its source code, differing only in the index variable.
+
+#### Collection
+To generate a collection of quines that have different extensions:
+```bash
+./test.sh
+```
 
 ## Screenshots
 
