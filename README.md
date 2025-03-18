@@ -84,7 +84,7 @@ To generate a collection of quines that have different extensions:
 
 1. **Before Execution**:
 <img src="screenshots/initial-state.png" />
-No replication has occurred yet. Index is at 50.
+No replication has occurred yet. Index is at 500.
 <br />
 
 2. **After Execution**:
