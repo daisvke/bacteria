@@ -86,6 +86,7 @@ To generate a collection of quines that have different extensions:
 <img src="screenshots/initial-state.png" />
 No replication has occurred yet. Index is at 50.
 <br />
+
 2. **After Execution**:
 <img src="screenshots/after-replication.png" width=452 />
 This shows the replicated files created by the program.
